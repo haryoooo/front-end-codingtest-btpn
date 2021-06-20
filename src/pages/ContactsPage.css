@@ -1,0 +1,5 @@
+.ContactsPage {
+    display: grid;
+    grid-area: auto;
+    grid-template-columns: auto auto auto;
+}
