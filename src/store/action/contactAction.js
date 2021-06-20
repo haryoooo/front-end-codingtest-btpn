@@ -66,7 +66,6 @@ export function addContacts(data) {
       .post(`${url}/contact`, data)
 
       .then((res) => {
-        alert(JSON.stringify(res.data.message))
         dispatch(fetchContacts());
       })
 

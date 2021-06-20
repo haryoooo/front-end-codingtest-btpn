@@ -12,11 +12,11 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useToast, Tooltip } from "@chakra-ui/react";
+import { useToast} from "@chakra-ui/react";
 import React, { useState } from "react";
 import "./CardComponent.css";
 import { Card, Icon, Image } from "semantic-ui-react";
-import { deleteContacts, editContacts, fetchContacts } from "../store/action/contactAction";
+import { deleteContacts, editContacts } from "../store/action/contactAction";
 import { useDispatch } from "react-redux";
 
 export default function CardComponent(props) {
@@ -28,21 +28,13 @@ export default function CardComponent(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const finalRef = React.useRef();
-  // const cancelRef = React.useRef();
   const dispatch = useDispatch();
 
   function editInContacts(id) {
 
     let condition;
 
-    const currentData = {
-      "firstName": props.firstName,
-      "lastName": props.lastName,
-      "age": props.age,
-      "photo": props.photo
-    };
-
-    const newData = {
+    const data = {
       "firstName": firstname,
       "lastName": lastname,
       "age": age,
@@ -51,15 +43,13 @@ export default function CardComponent(props) {
 
     do {
 
-      if (
-        firstname === currentData.firstname && lastname === currentData.lastName &&
-        age === currentData.age) {
+      if (!firstname && !lastname && !age) {
         condition = false;
         toastIdRef.current = toast({
           position: "top",
           status: "error",
           duration: 2000,
-          description: "there's nothing changed",
+          description: "fill the column first",
         });
         return;
       }
@@ -99,7 +89,7 @@ export default function CardComponent(props) {
 
       else {
         condition = true
-        dispatch(editContacts(newData, id));
+        dispatch(editContacts(data, id));
         toastIdRef.current = toast({
           position: "top",
           status: "success",
@@ -107,9 +97,9 @@ export default function CardComponent(props) {
           description: "contact succesfully edited",
         });
         onClose();
+        return
       }
-    }
-    while (condition)
+    }while (condition)
   }
 
   function deleteFromContacts(id) {
@@ -122,23 +112,21 @@ export default function CardComponent(props) {
         <Card>
           <Card.Content>
             <Image
+              size="10"
               floated='right'
-              size='mini'
+              size='small'
               src={props.photo}
             />
             <Card.Header>{props.firstname} {props.lastname}</Card.Header>
             <Card.Meta>{props.age} years old</Card.Meta>
             <Card.Description>
+            <Icon name="user" />
               {props.firstname} is in your contacts
             </Card.Description>
           </Card.Content>
 
           <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              Friend in your Contacts
-            </a>
-            <div style={{ paddingTop: 20 }}>
+            <div>
               <Button colorScheme="green" onClick={onOpen}>
               <Icon name="edit" />
                 Edit
@@ -179,8 +167,7 @@ export default function CardComponent(props) {
                   <Input
                     ref={initialRef}
                     onChange={(e) => setFirstname(e.target.value)}
-                    placeholder="First name"
-                    defaultValue={props.firstname}
+                    placeholder={props.firstname}
                   />
                 </FormControl>
 
@@ -188,8 +175,7 @@ export default function CardComponent(props) {
                   <FormLabel>Last name</FormLabel>
                   <Input
                     onChange={(e) => setLastname(e.target.value)}
-                    placeholder="Last name"
-                    defaultValue={props.lastname}
+                    placeholder={props.lastname}
                   />
                 </FormControl>
 
@@ -197,8 +183,7 @@ export default function CardComponent(props) {
                   <FormLabel>Age</FormLabel>
                   <Input
                     onChange={(e) => setAge(e.target.value)}
-                    placeholder="Age"
-                    defaultValue={props.age}
+                    placeholder={props.age}
                   />
                 </FormControl>
               </ModalBody>

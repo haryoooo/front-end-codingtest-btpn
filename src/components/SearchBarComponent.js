@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import "./SearchBarComponent.css";
+import { Heading } from "@chakra-ui/react"
 import AddContactComponent from '../components/AddContactComponent'
 import TextField from '@material-ui/core/TextField';
 
@@ -9,8 +9,8 @@ export default function SearchBarComponent(props) {
   return (
     <>
     <div className="SearchBar">
-        <h1>Contacts</h1>
-        <TextField id="standard-search" label="Search" type="search" onKeyUp={props.filterByName} />
+        <Heading as="h1" size="3xl">Contacts App</Heading>
+        <TextField id="standard-search" label="Search Contact" type="search" onKeyUp={props.filterByName} />
     </div>
     <AddContactComponent />
     </>

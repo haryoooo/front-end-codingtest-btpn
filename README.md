@@ -2,7 +2,7 @@
 
 ## Guide
 
-### npm install
+### `npm install`
 
 using npm install to install all the dependecies in this project
 
@@ -20,4 +20,5 @@ You will also see any lint errors in the console.
 - Chakra UI React
 - ReactJS 
 - React Redux
+- Redux Thunk
 - Axios for fetch and CRUD API data

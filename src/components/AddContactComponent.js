@@ -115,7 +115,7 @@ export default function AddContactComponent() {
         <ModalContent>
           <ModalHeader>Create a new contact</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pb={4}>
             <FormControl className="Centering" width={"max-content"}>
               <Image
                 borderRadius="full"
