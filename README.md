@@ -22,3 +22,7 @@ You will also see any lint errors in the console.
 - React Redux
 - Redux Thunk
 - Axios for fetch and CRUD API data
+
+## Side Notes
+
+- I think there's a problem with the delete from the API, because sometimes it works sometimes it doesn't
