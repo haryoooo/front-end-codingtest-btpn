@@ -1,12 +1,16 @@
 .CardComponent {
-    padding: auto 50px;
-    margin: 50px auto;
+  padding: auto 50px;
+  margin: 50px auto;
+}
+
+.CardComponent:hover {
+  transform: scale(1.03);
 }
 
 h3 {
-    margin: 20px auto;
+  margin: 20px auto;
 }
 
 .Icon {
-    margin-right: 3px;
+  margin-right: 3px;
 }
