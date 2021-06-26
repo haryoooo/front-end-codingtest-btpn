@@ -10,7 +10,7 @@ export default function SearchBarComponent(props) {
     <>
     <div className="SearchBar">
         <Heading as="h1" size="3xl">Contacts App</Heading>
-        <TextField id="standard-search" label="Search Contact" type="search" onKeyUp={props.filterByName} />
+        <TextField id="standard-search" label="Search Contact" type="search" onChange={props.filterByName} />
     </div>
     <AddContactComponent />
     </>

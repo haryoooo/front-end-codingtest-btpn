@@ -30,8 +30,16 @@ export default function CardComponent(props) {
   const finalRef = React.useRef();
   const dispatch = useDispatch();
 
-  function editInContacts(id) {
 
+  function handleChange(){
+    onOpen()
+
+    setFirstname(props.firstname)
+    setLastname(props.lastname)
+    setAge(props.age)
+  }
+
+  function editInContacts(id) {
     let condition;
 
     const data = {
@@ -127,7 +135,7 @@ export default function CardComponent(props) {
 
           <Card.Content extra>
             <div>
-              <Button colorScheme="green" onClick={onOpen}>
+              <Button colorScheme="green" onClick={handleChange}>
               <Icon name="edit" />
                 Edit
               </Button>
@@ -167,7 +175,7 @@ export default function CardComponent(props) {
                   <Input
                     ref={initialRef}
                     onChange={(e) => setFirstname(e.target.value)}
-                    placeholder={props.firstname}
+                    value={firstname}
                   />
                 </FormControl>
 
@@ -175,7 +183,7 @@ export default function CardComponent(props) {
                   <FormLabel>Last name</FormLabel>
                   <Input
                     onChange={(e) => setLastname(e.target.value)}
-                    placeholder={props.lastname}
+                    value={lastname}
                   />
                 </FormControl>
 
@@ -183,7 +191,7 @@ export default function CardComponent(props) {
                   <FormLabel>Age</FormLabel>
                   <Input
                     onChange={(e) => setAge(e.target.value)}
-                    placeholder={props.age}
+                    value={age}
                   />
                 </FormControl>
               </ModalBody>

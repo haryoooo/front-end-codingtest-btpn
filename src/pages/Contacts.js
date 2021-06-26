@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchContacts } from "../store/action/contactAction";
-import CardComponent from "../components/CardComponent";
 import { Container } from "semantic-ui-react";
-import "./ContactsPage.css";
 import SearchBarComponent from "../components/SearchBarComponent";
-import LoadingComponent from "../components/LoadingComponent";
+import ContactsComponent from "../components/ContactsComponent";
 
 export default function Contacts() {
   const [Value, setValue] = useState("");
@@ -31,50 +29,17 @@ export default function Contacts() {
     setValue(contactSearch);
   }
 
-  if (isLoading) {
-    return (
-      <div>
-        <LoadingComponent />
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <Container>
-          <SearchBarComponent filterByName={filterByName} />
-          {filteredName ? (
-            <div className="ContactsPage">
-              {Value.map((value) => {
-                return (
-                  <CardComponent
-                    id={value.id}
-                    key={value.id}
-                    firstname={value.firstName}
-                    lastname={value.lastName}
-                    age={value.age}
-                    photo={value.photo}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div className="ContactsPage">
-              {contacts.map((value) => {
-                return (
-                  <CardComponent
-                    id={value.id}
-                    key={value.id}
-                    firstname={value.firstName}
-                    lastname={value.lastName}
-                    age={value.age}
-                    photo={value.photo}
-                  />
-                );
-              })}
-            </div>
-          )}
-        </Container>
-      </>
-    );
-  }
+  return (
+    <>
+      <Container>
+        <SearchBarComponent filterByName={filterByName} />
+        <div>
+          <ContactsComponent
+            contacts={filteredName ? Value : contacts}
+            isLoading={isLoading}
+          />
+        </div>
+      </Container>
+    </>
+  );
 }
